@@ -10,10 +10,10 @@ Commit meaning:
 
 #test for markdown
 1. How are you
-	I'm fine.
+	* I'm fine.
 2. How about you
-	I'm good.
-	I'm good.
+	* I'm good.
+	* I'm good.
 
 
 
