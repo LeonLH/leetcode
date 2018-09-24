@@ -19,7 +19,7 @@ Numbered list:
 2. rinse
 3. repeat
 
-Nested list:
+Four spaces Nested list:
 1. wash
     1. wash dishes
     2. wash cloth
@@ -29,6 +29,17 @@ Nested list:
     * repeat 1
     * repeat 2
     * repeat 3
+
+Tab Nested list:
+1. wash
+	1. wash dishes
+	2. wash cloth
+	3. wash shoes
+2. rinse
+3. repeat
+	* repeat 1
+	* repeat 2
+	* repeat 3
 
 Indent:
 	<p>R: reference
