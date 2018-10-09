@@ -1,7 +1,4 @@
-#include<stack>
-#include<vector>
-#include<iostream>
-using namespace std;
+//#84. Largest Rectangle in Histogram
 //0
 //1. 遍历每一个竖条，每次计算它和左边边界围城的面积，需要高度和宽度；
 //2. 高度有两种可能性：1）自身的高；2）最低条的高；
@@ -19,6 +16,11 @@ using namespace std;
 //ps: There are two situation when we traverse:
 // 		1) Current bar is higher than previous bar(Increment), then we push to a stack which record the left_index of rectangle;
 // 		2) Current bar is lower than previous bar(Decrement), then we pop above stack until the stack's top is a little lower than current bar;
+
+#include<stack>
+#include<vector>
+#include<iostream>
+using namespace std;
 class Solution {
 public:
 	int largestRectangleArea(vector<int>& height){
