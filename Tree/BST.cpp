@@ -130,7 +130,10 @@ bool TreeNode::deleteBST(TreeNode* &T, int key){
 		prev = findInorderPrev(T, curr);
 		searchBST(T, prev->val, prevpare);
 		curr->val = prev->val;
-		prevpare->right = prev->left;
+		if(prev == curr->left)
+			curr->left = prev->left;	//prev don't have right child
+		else
+			prevpare->right = prev->left;//prev don't have right child
 		delete prev;
 	}
 	return true;
@@ -150,7 +153,7 @@ int main(){
 	T->printInorderRe(T);
 	cout << endl;
 	cout << "After Delete:" << endl;
-	T->deleteBST(T,69);
+	T->deleteBST(T,78);
 	T->printPreorderRe(T);
 	cout << endl;
 	T->printInorderRe(T);
