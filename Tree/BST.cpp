@@ -60,8 +60,6 @@ void TreeNode::createBST(BiTree &T, int A[], unsigned int nlen){
 TreeNode* TreeNode::searchBST(TreeNode* T, int key, TreeNode* &pare){
 	if(!T) return NULL;
 	TreeNode* p = T;
-	TreeNode* curr;
-	pare = curr = NULL;
 	while(p != NULL && p->val != key){
 		pare = p;
 		if(key < p->val) 
@@ -69,9 +67,7 @@ TreeNode* TreeNode::searchBST(TreeNode* T, int key, TreeNode* &pare){
 		else
 			p = p->right;
 	}
-	if(p && key == p->val)
-		curr = p;
-	return curr; 
+	return p; 
 }
 
 TreeNode* TreeNode::findInorderPrev(TreeNode* T, TreeNode* obj){
@@ -133,7 +129,6 @@ int TreeNode::deleteBST(TreeNode* &T, int key){
 	else if(curr->left && curr->right){
 		TreeNode* prev = NULL, * prevpare = NULL;
 		prev = findInorderPrev(T, curr);
-		//searchBST(T, prev->val, prevpare, prev);
 		searchBST(T, prev->val, prevpare);
 		curr->val = prev->val;
 		prevpare->right = prev->left;
@@ -146,7 +141,10 @@ int main(){
 	TreeNode *T = NULL;
 	T->createBST(T, A, sizeof(A)/sizeof(int));
 	TreeNode* pare=NULL, * curr=NULL;
-	cout << T->searchBST(T, 9, pare) << endl;
+	if(T->searchBST(T, 69, pare))
+		cout << "Yes!" << endl;
+	else
+		cout << "No!" << endl;
 
 	T->printPreorderRe(T);
 	cout << endl;
