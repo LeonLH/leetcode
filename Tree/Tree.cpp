@@ -1,5 +1,6 @@
 #include"Tree.h"
 
+
 void TreeNode::printInorderRe(TreeNode *T){
 	if(T){
 		printInorderRe(T->left);
@@ -20,6 +21,22 @@ void TreeNode::printPreorderRe(TreeNode *T){
 		printPreorderRe(T->left);
 		printPreorderRe(T->right);
 	}
+}
+void TreeNode::printLevelorderIt(TreeNode *T){
+	if(!T) return;
+	TreeNode* p = NULL;
+	queue<TreeNode*> Q;
+	Q.push(T);
+	while(!Q.empty()){
+		p = Q.front();
+		cout << p->val << " ";
+		Q.pop();
+		if(p->left)
+			Q.push(p->left);
+		if(p->right)
+			Q.push(p->right);
+	}
+
 }
 void TreeNode::printPreorderIt(TreeNode *T){
 	if(!T)	return;

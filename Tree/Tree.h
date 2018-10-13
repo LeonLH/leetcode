@@ -1,4 +1,5 @@
 #include<iostream>
+#include<queue>
 #include<string.h>
 #include<stack>
 #include<algorithm>
@@ -15,9 +16,11 @@ typedef struct TreeNode{
 	void printInorderRe(TreeNode *T);
 	void printPreorderRe(TreeNode *T);
 	void printPostorderRe(TreeNode *T);
+	void printLevelorderRe(TreeNode *T);
 
 	void printInorderIt(TreeNode *T);
 	void printPreorderIt(TreeNode *T);
 	void printPostorderIt(TreeNode *T);
+	void printLevelorderIt(TreeNode *T);
 
 }TreeNode, BiTNode, BSTNode, *BiTree;
