@@ -13,7 +13,7 @@ typedef struct TreeNode{
 
 	TreeNode* searchBST(TreeNode* T, int key, TreeNode* &pare);
 	TreeNode* findInorderPrev(TreeNode* T, TreeNode* curr);
-	int deleteBST(TreeNode* &T, int key);
+	bool deleteBST(TreeNode* &T, int key);
 
 	void printPreorderRe(TreeNode* T);
 	void printInorderRe(TreeNode* T);
@@ -92,13 +92,12 @@ TreeNode* TreeNode::findInorderPrev(TreeNode* T, TreeNode* obj){
 }
 
 
-int TreeNode::deleteBST(TreeNode* &T, int key){
+bool TreeNode::deleteBST(TreeNode* &T, int key){
 	if(!T) return 0;
 	TreeNode* pare = NULL;
 	TreeNode* curr = NULL;
-	//if(!searchBST(T, key, pare, curr)) return 0;
 	curr = searchBST(T, key, pare);
-	if(!curr) return 0;
+	if(!curr) return false;
 	if(!curr->left && !curr->right){
 		if(!pare)
 			T = NULL;
@@ -134,7 +133,7 @@ int TreeNode::deleteBST(TreeNode* &T, int key){
 		prevpare->right = prev->left;
 		delete prev;
 	}
-	return 1;
+	return true;
 }
 int main(){
 	int A[] = {53, 17, 78, 9, 45, 65, 69, 87, 23};
