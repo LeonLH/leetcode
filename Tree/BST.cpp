@@ -8,8 +8,8 @@ typedef struct TreeNode{
 	TreeNode(int x): val(x), left(nullptr), right(nullptr) {};
 	TreeNode(){};
 
-	int insertBST(TreeNode* &T, int k);
-	void createBST(TreeNode* &T, int A[], unsigned int nlen);
+	bool insertBST(TreeNode* &T, int k);
+	void createBST(TreeNode* &T, int A[], int nlen);
 
 	TreeNode* searchBST(TreeNode* T, int key, TreeNode* &pare);
 	TreeNode* findInorderPrev(TreeNode* T, TreeNode* curr);
@@ -36,24 +36,22 @@ void TreeNode::printPreorderRe(TreeNode* T){
 	}	
 }
 
-int TreeNode::insertBST(BiTree &T, int key){
+bool TreeNode::insertBST(TreeNode* &T, int key){
 	if(!T){
-		T = new TreeNode;
-		T->val = key;
-		T->left = T->right = NULL;
-		return 1;
+		T = new TreeNode(key);
+		return false;
 	}
 	else if(key == T->val)
-		return 0;
+		return true;
 	else if(key <  T->val)
 		return insertBST(T->left, key);
 	else 
 		return insertBST(T->right, key);
 }
 
-void TreeNode::createBST(BiTree &T, int A[], unsigned int nlen){
+void TreeNode::createBST(TreeNode* &T, int A[], int nlen){
 	T = NULL;
-	for(int i=0; (unsigned)i<nlen; ++i)
+	for(int i=0; i<nlen; ++i)
 		insertBST(T, A[i]);
 }
 
