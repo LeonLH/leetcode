@@ -1,100 +1,127 @@
-#include<algorithm>
 #include<iostream>
-using namespace std;
+using namespace  std;
 struct AVLNode{
-	int key;
+	int val;
 	AVLNode* left;
 	AVLNode* right;
 	int height;
-
 	AVLNode(){};
-	AVLNode(int x): key(x), left(nullptr), right(nullptr), height(1) {};
+	AVLNode(int key): val(key), left(NULL), right(NULL), height(1){};
 
-	void rightRotate(AVLNode* &p);
-	void  leftRotate(AVLNode* &p);
-	void  insert(AVLNode* &node, int key);
+	
+	void leftRotate(AVLNode* &T);
+	void rightRotate(AVLNode* &T);
+	bool insertAVL(AVLNode* &T, int k);
+	bool createAVL(AVLNode* &T, int A[], int nlen);
 
-	void printInorder(AVLNode* T);
+	void printInorderRe(AVLNode* T);
+	void printPreorderRe(AVLNode* T);
+
 };
 
-int maxHeight(AVLNode* node1, AVLNode* node2){
-	if(!node1 && !node2)
+int maxHeight(AVLNode* N1, AVLNode* N2){
+	if(!N1 && !N2)
 		return 0;
-	if(!node1 &&  node2)
-		return node2->height;
-	if( node1 && !node2)
-		return node1->height;
-	return max(node1->height, node2->height);
+	else if(!N1 &&  N2)
+		return N2->height;
+	else if( N1 && !N2)
+		return N1->height;
+	else
+		return max(N1->height, N2->height);
 }
-
-int getBalance(AVLNode* node){
-	if(!node) return 0;
-	if(!node->left && !node->right)
+int GetBalanceFactor(AVLNode* T){
+	if(!T)
 		return 0;
-	if(!node->left &&  node->right)
-		return 0 - node->right->height;
-	if( node->left && !node->right)
-		return node->left->height;
-	return node->left->height - node->right->height;	
+	else if(!T->left && !T->right)
+		return 0;
+	else if( T->left && !T->right)
+		return T->left->height;
+	else if(!T->left &&  T->right)
+		return - T->right->height;
+	else 
+		return T->left->height - T->right->height;
 }
-
 void AVLNode::rightRotate(AVLNode* &p){
 	AVLNode* lc = p->left;
-	p->left = lc ->right;
+	p->left = lc->right;
 	lc->right = p;
-	//Update p's height first, then update lc's height.
 	p->height = 1 + maxHeight(p->left, p->right);
 	lc->height = 1 + maxHeight(lc->left, lc->right);
 	p = lc;
-}
 
+}
 void AVLNode::leftRotate(AVLNode* &p){
 	AVLNode* rc = p->right;
 	p->right = rc->left;
 	rc->left = p;
-	p->height = 1 + maxHeight(p->left, p->right);		//1 represents p itself. 
+	p->height = 1 + maxHeight(p->left, p->right);
 	rc->height = 1 + maxHeight(rc->left, rc->right);
 	p = rc;
 }
+// 1. Insert as a normal BST;
+// 2. Update the height of T;
+// 3. Get the balance factor;
+// 4. Rotate to ajust the unbalanced tree, there are four condition: LL RR LR RL;
+bool AVLNode::insertAVL(AVLNode* &T, int k){
+	if(!T){
+		T = new AVLNode(k);
+		return true;
+	}
+	AVLNode* p = T;
+	if(k == p->val)
+		return false;
+	if(k < p->val)
+		insertAVL(p->left, k);
+	else if(k > p->val)
+		insertAVL(p->right, k);
+	T->height = 1 + maxHeight(T->left, T->right);
+	int bf = GetBalanceFactor(T);
+	if(bf > 1 && k < T->left->val)
+		rightRotate(T);
+	else if(bf < -1 && k > T->right->val)
+		leftRotate(T);
+	else if(bf > 1 && k > T->left->val){
+		leftRotate(T->left);
+		rightRotate(T);
+	}
+	else if(bf < -1 && k < T->right->val){
+		rightRotate(T->right);
+		leftRotate(T);
+	}
+	return true;
 
-void AVLNode::insert(AVLNode* &node, int key){
-	if(!node)
-		node = new AVLNode(key);
-	if(key < node->key)
-		insert(node->left, key);
-	else if(key > node->key)
-		insert(node->right, key);
-	node->height = 1 + maxHeight(node->left, node->right);
-	int balance = getBalance(node);
-	if(balance > 1 && key < node->left->key)
-		rightRotate(node);
-	if(balance < -1 && key > node->right->key)
-		leftRotate(node);
-	if(balance > 1 && key > node->left->key){
-		leftRotate(node->left);
-		rightRotate(node);
-	}
-	if(balance < -1 && key < node->right->key){
-		rightRotate(node->right);
-		leftRotate(node);
-	}
 }
-
-void AVLNode::printInorder(AVLNode* T){
+bool AVLNode::createAVL(AVLNode* &T, int A[], int nlen){
+	if(!T) 
+		T = NULL;
+	for(int i=0; i<nlen; ++i)
+		insertAVL(T, A[i]);
+	return true;
+}
+void AVLNode::printPreorderRe(AVLNode* T){
 	if(T){
-		printInorder(T->left);
-		cout << T->key << " ";
-		printInorder(T->right);
+		cout << T->val << " ";
+		printPreorderRe(T->left);
+		printPreorderRe(T->right);
 	}
 }
+void AVLNode::printInorderRe(AVLNode* T){
+	if(T){
+		printInorderRe(T->left);
+		cout << T->val << " ";
+		printInorderRe(T->right);
+	}
 
+}
 int main(){
-	AVLNode* T = NULL;
-	int A[] = {1, 2, 20, 11, 72, 40, 7, 9, 16, 17, 38, 12, 60};
-	int n = sizeof(A)/sizeof(int);
-	for(int i=0; i<n; ++i)
-		T->insert(T, A[i]);
-	T->printInorder(T);
+	int A[] = {53, 17, 78, 9, 45, 65, 69, 87, 23, 58};
+	AVLNode *T = NULL;
+	T->createAVL(T, A, sizeof(A)/sizeof(int));	
+	cout << "PreorderRe:\t";
+	T->printPreorderRe(T);
+	cout << endl;
+	cout << "InorderRe:\t";
+	T->printInorderRe(T);
 	cout << endl;
 	return 0;
 }
