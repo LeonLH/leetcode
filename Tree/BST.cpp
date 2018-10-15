@@ -17,6 +17,7 @@ typedef struct TreeNode{
 
 	void printPreorderRe(TreeNode* T);
 	void printInorderRe(TreeNode* T);
+	void printPreorderIt(TreeNode* T);
 
 }BSTNode, *BiTree;
 
@@ -89,6 +90,20 @@ TreeNode* TreeNode::findInorderPrev(TreeNode* T, TreeNode* obj){
 	return prev;
 }
 
+void TreeNode::printPreorderIt(TreeNode* T){
+	if(!T) return;
+	stack<TreeNode*> S;
+	S.push(T);
+	while(!S.empty()){
+		TreeNode* p = S.top();
+		cout << p->val << " ";
+		S.pop();
+		if(p->right)
+			S.push(p->right);
+		if(p->left)
+			S.push(p->left);
+	}
+}
 
 bool TreeNode::deleteBST(TreeNode* &T, int key){
 	if(!T) return 0;
@@ -146,7 +161,7 @@ int main(){
 	else
 		cout << "No!" << endl;
 
-	T->printPreorderRe(T);
+	T->printPreorderIt(T);
 	cout << endl;
 	T->printInorderRe(T);
 	cout << endl;
