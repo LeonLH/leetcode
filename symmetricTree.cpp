@@ -1,9 +1,12 @@
 // 1. The result of Inorder traversal and Reverse-Inorder traversal are equal.
 // 2. The key of the problem is not only the val of node should be equal, but also the pointer should be symmetric.
 // 3. BUT inorder and preorder can define an unique tree, so 'inorder equals to reInorder' PLUS 'preorder equals to rePreorder' can make sure it is symmetric. 
+<<<<<<< HEAD
 // There must be a better way for this problem. 
 
 
+=======
+>>>>>>> f35bc06... #101 1H S
 
 #include<vector>
 #include<iostream>
