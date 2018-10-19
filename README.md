@@ -9,3 +9,6 @@ Commit meaning:
 * Number1: Problem Number;
 * Number2: Time cost;  
 
+#29 Divide Two Intergers
+Be careful when substact with two different size of number, e.t. int and long long int. 
+`int` is 32 byte, while `long long int` is 64 byte. 
