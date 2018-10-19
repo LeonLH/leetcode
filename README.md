@@ -10,8 +10,8 @@ Commit meaning:
 * Number2: Time cost;  
 
 #29 Divide Two Intergers
-Be careful when substact with two different size of number, e.t. int and long long int. 
-`int` is 32 byte, while `long long int` is 64 byte. 
-#116 3H S/R
-#116 Populating Next Right Pointer in Each Node  3H S/R
-A good way to mark the level in levelorder traversal, Worth to read again.
+1. Be careful when substact with two different size of number, e.t. int and long long int. 
+2. `int` is 32 byte, while `long long int` is 64 byte. 
+
+#116 Populating Next Right Pointer in Each Node (3H S/R)
+1. A good way to mark the level in levelorder traversal, Worth to read again.
