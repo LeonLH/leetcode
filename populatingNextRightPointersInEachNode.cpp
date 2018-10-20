@@ -43,6 +43,34 @@ public:
         }
     }
 };
+class Solution4test{
+public:
+	void connect(TreeLinkNode* T){
+		if(T == NULL) return ;
+		queue<TreeLinkNode*> Q;
+		Q.push(T);
+		TreeLinkNode* prev = NULL;
+		TreeLinkNode* curr = NULL;
+		while(!Q.empty()){
+			int tmp_size = Q.size();
+			prev = curr = NULL;
+			for(int i = 0; i <tmp_size; i++){
+				curr = Q.front();
+				Q.pop();
+				if(prev)
+					prev->next = curr;
+				prev = curr;
+				if(curr->left)
+					Q.push(curr->left);
+				if(curr->right)
+					Q.push(curr->right);
+				curr = NULL;
+			}
+			prev -> next = NULL;
+			
+		}
+	}
+}
 class Solution1 {
 public:
 	bool isStartOfLevel(TreeLinkNode* p, vector<TreeLinkNode*> v){
@@ -162,7 +190,10 @@ int main(){
 	cout << "\tPreorder:\t";
 	printPreorderIt(T);
 	cout << endl;
-
+	Solution  A0;
+	Solution1 A1;
+//	A0.connect(T);
+	A1.connect(T);
 	return 0;
 }
 
