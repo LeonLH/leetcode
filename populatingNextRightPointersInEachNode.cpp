@@ -11,39 +11,7 @@ struct TreeLinkNode{
 
 
 };
-class Solution {
-public:
-    void connect(TreeLinkNode *T) {
-        if(T == NULL) return;
-        queue<TreeLinkNode *> Q;
-        Q.push(T);
-        TreeLinkNode * prev = NULL;
-        TreeLinkNode * curr = NULL;
-
-        while(!Q.empty()) {
-            int tmp_size = Q.size();
-
-			prev = curr = NULL;
-            for (int i = 0; i < tmp_size; i++) {
-                curr = Q.front();
-                Q.pop();
-
-                if(prev) 
-					prev->next = curr;
-                prev = curr;
-
-                if(curr->left)
-					Q.push(curr->left);
-                if(curr->right)
-					Q.push(curr->right);
-				
-				curr = NULL;		// Why adding this line can speed up program by 25%? This line can also be removed. 
-            }
-            prev->next = NULL;
-        }
-    }
-};
-class Solution4test{
+class Solution{
 public:
 	void connect(TreeLinkNode* T){
 		if(T == NULL) return ;
@@ -64,13 +32,13 @@ public:
 					Q.push(curr->left);
 				if(curr->right)
 					Q.push(curr->right);
-				curr = NULL;
+				curr = NULL;	// Why adding this line can speed up program by 25%? This line can also be removed. 
 			}
 			prev -> next = NULL;
 			
 		}
 	}
-}
+};
 class Solution1 {
 public:
 	bool isStartOfLevel(TreeLinkNode* p, vector<TreeLinkNode*> v){
