@@ -120,47 +120,52 @@ void selectSort(int arr[], int n){
 	}
 }
 
-void adjustDown(int arr[], int k, int n){	// k = 0 ? 
-	int i;
-	int tmp = arr[k];
-	for(i = 2*k; i < n; i *= 2){
-		if(i < n-1 && arr[i] < arr[i+1])
-			++i;
-		if(tmp >= arr[i])
-			break;
-		else{
-			arr[k] = arr[i];
-			k = i;
-		}
-	}
-	arr[k] = tmp;
+// 由于完全二叉树的顺序存储下标之间的关系，当把数组第一个元素用作哨兵时，便于计算它的父节点(n/2)和子节点的下标(2n, 2n+1), 所以把头节点空出来不存储元素，这个空出来的节点可以当作暂存元素；
+// 如此一来，可以在排序的第一步把原数据复制到一个新的比它大1的数组中，然后再进行操作，排序完成后，把结果再复制回原数组中；
+void adjustDown(int arr[], int k, int n){	
+	arr[0] = arr[k];
+	int i ;									// i is children, k is parents of i
+	for(i = 2*k; i <= n; i *= 2){                                                    
+		if(i < n && arr[i] < arr[i+1])                                               
+			++i;                                                                     
+		if(arr[0] >= arr[i])                                                         
+			break;                                                                   
+		else{                                                                        
+			arr[k] = arr[i];                // k is something like previous.
+			k = i;                                                                   
+		}                                                                            
+	}                                       // k is last node larger than tmp
+	arr[k] = arr[0];
 }
-/*
+
 void adjustUp(int arr[], int k){
-	int tmp = arr[k];
-	int i;
-	for(i = k/2; i >= 0 && arr[i] < tmp; i /= 2){
+	arr[0] = arr[k];
+	for(int i = k/2; i > 0 && arr[i] < arr[0]; i /= 2){
 		arr[k] = arr[i];
 		k = i;
 	}
-	arr[k] = tmp;
+	arr[k] = arr[0];
 }
-*/
+
 void buildMaxHeap(int arr[], int n){
-	for(int i = n/2; i >= 0; --i)
+	for(int i = n/2; i > 0; --i)
 		adjustDown(arr, i, n);
 }
 
-void heapSort(int arr[], int n){
+void heapSort(int* &A, int n){
+	int* arr = new int[n+1];
+	arr[0] = 0;
+	for(int i = 0; i < n; ++i)
+		arr[i+1] = A[i];
 	buildMaxHeap(arr, n);
 	int tmp, i;
-	for(i = n-1; i > 0; --i){
+	for(i = n; i > 1; --i){
 		tmp = arr[i];
-		arr[i] = arr[0];
-		arr[0] = tmp;
-		adjustDown(arr, 0, i);
+		arr[i] = arr[1];
+		arr[1] = tmp;
+		adjustDown(arr, 1, i-1);
 	}
-
+	A = arr+1;
 }
 
 void printArray(int A[], int n){
@@ -173,8 +178,8 @@ void printArray(int A[], int n){
 int main(){
 	int i, j;
 	int A[] = {34, 56, 76, 27, 26, 74, 23, 32};
-	//buildMaxHeap(A, sizeof(A)/sizeof(int));
-	heapSort(A, sizeof(A)/sizeof(int));
-	printArray(A, sizeof(A)/sizeof(int));
+	int* p = A;
+	heapSort(p, sizeof(A)/sizeof(int));
+	printArray(p, sizeof(A)/sizeof(int));
 	return 0;
 }
