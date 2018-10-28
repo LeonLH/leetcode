@@ -159,12 +159,40 @@ void printArray(int A[], int n){
 
 }
 
+// mergeSort
+
+int n ;
+int* B = new int[n];
+
+void merge(int A[], int low, int mid, int high){
+	for(int k = low; k <= high; ++k)
+		B[k] = A[k];
+	int i, j, k;
+	for(i = low, j = mid+1, k = i; i <= mid && j <= high; ++k){
+		if(B[i] <= B[j])
+			A[k] = B[i++];
+		else
+			A[k] = B[j++];
+	}
+	while(i <= mid)  A[k++] = B[i++];
+	while(j <= high) A[k++] = B[j++];
+}
+
+void mergeSort(int arr[], int low, int high){
+	if(low < high){
+		int mid = (low + high)/2;
+		mergeSort(arr, low, mid);
+		mergeSort(arr, mid+1, high);
+		merge(arr, low, mid, high);
+	}
+}
+
 int main(){
 	int i, j;
 	int A[] = {34, 56, 76, 51, 27, 48, 74, 23, 20, 32};
-	int n = sizeof(A)/sizeof(int);
+	n = sizeof(A)/sizeof(int);
 	int* p = A;
-	binaryInsertSort(p, n);
+	mergeSort(p, 0, n-1);
 	printArray(p, n);
 	return 0;
 }
