@@ -159,12 +159,12 @@ void printArray(int A[], int n){
 
 }
 
-// mergeSort
+// mergeSort: for array
 
 int n ;
 int* B = new int[n];
 
-void merge(int A[], int low, int mid, int high){
+void mergeCore(int A[], int low, int mid, int high){
 	for(int k = low; k <= high; ++k)
 		B[k] = A[k];
 	int i, j, k;
@@ -183,8 +183,57 @@ void mergeSort(int arr[], int low, int high){
 		int mid = (low + high)/2;
 		mergeSort(arr, low, mid);
 		mergeSort(arr, mid+1, high);
-		merge(arr, low, mid, high);
+		mergeCore(arr, low, mid, high);
 	}
+}
+
+// mergeSort: for linked-list
+struct ListNode{
+	int val;
+	ListNode* next;
+	ListNode(int x): val(x), next(NULL) {}
+	ListNode(){}
+};
+
+ListNode* mergerTwoList(ListNode* head1, ListNode* head2);
+
+ListNode* sortList(ListNode* head){
+	if(head == NULL || head->next == NULL)
+		return head;
+
+	ListNode* p1 = head, * p2 = head->next;
+	while(p2 && p2->next){
+		p1 = p1->next;
+		p2 = p2->next->next;
+	}
+	p2 = p1->next;
+	p1->next = NULL;	// It's important to set a bounder as NULL instead of using the next node as bounder.
+						// Because It can be changed easily and we can hardly notice it's change. 
+	return mergerTwoList(sortList(head), sortList(p2));
+}
+
+ListNode* mergerTwoList(ListNode* head1, ListNode* head2){
+	ListNode* p1 = head1, * p2 = head2;
+	static ListNode dummy(0);
+	ListNode* tail = &dummy;
+
+	while(p1 && p2){
+		if(p1->val <= p2->val){
+			tail->next = p1;
+			p1 = p1->next;
+			tail = tail->next;
+		}
+		else{
+			tail->next = p2;
+			p2 = p2->next;
+			tail = tail->next;
+		}
+	}
+	if(p1)
+		tail->next = p1;
+	if(p2)
+		tail->next = p2;
+	return dummy.next;
 }
 
 int main(){
