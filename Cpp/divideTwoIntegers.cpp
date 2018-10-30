@@ -58,3 +58,7 @@ int main(){
 	return 0;
 }
 
+/*
+* 1. Be careful when substact with two different size of number, e.t. int and long long int. 
+* 2. `int` is 32 byte, while `long long int` is 64 byte. 
+*/
