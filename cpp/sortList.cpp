@@ -11,57 +11,14 @@ struct ListNode{
 // 	0. First separate
 // Maybe the mergeSort is a good idea; 
 
-// Mergesort
-
-
-class Solution{
-public:
-	ListNode* sortList(ListNode* head){
-		if(head == NULL || head->next == NULL)
-			return head;
-
-		ListNode* p1 = head, * p2 = head->next;
-		while(p2 && p2->next){
-			p1 = p1->next;
-			p2 = p2->next->next;
-		}
-		p2 = p1->next;
-		p1->next = NULL;
-		return mergerTwoList(sortList(head), sortList(p2));
-	}
-
-	ListNode* mergerTwoList(ListNode* head1, ListNode* head2){
-		ListNode* p1 = head1, * p2 = head2;
-		static ListNode dummy(0);
-		ListNode* tail = &dummy;
-
-		while(p1 && p2){
-			if(p1->val <= p2->val){
-				tail->next = p1;
-				p1 = p1->next;
-				tail = tail->next;
-			}
-			else{
-				tail->next = p2;
-				p2 = p2->next;
-				tail = tail->next;
-			}
-		}
-		if(p1)
-			tail->next = p1;
-		if(p2)
-			tail->next = p2;
-		return dummy.next;
-	}
-};
-
+// Mergesort 68ms
 class Solution3{
 public:
-	void mergeCore(ListNode* low, ListNode* mid, ListNode* high){
-		ListNode* p1 = low, * p2 = mid->next;
-		ListNode* list = new ListNode(0);
-		ListNode* p = list;
-		while(p1 != mid->next && p2 != high->next){
+
+	void mergeCore(ListNode* &p1, ListNode* p2){
+		ListNode* dummy = new ListNode(0);
+		ListNode* p = dummy;
+		while(p1 && p2){
 			if(p1->val <= p2->val){
 				p->next = p1;
 				p1 = p1->next;
@@ -73,44 +30,32 @@ public:
 				p = p->next;
 			}
 		}
-		// if(p1 != mid ) p->next = p1;
-		// if(p2 != high) p->next = p2;
-		while(p1 != mid->next){
-			p->next = p1;
-			p1 = p1->next;
-			p = p->next;
-		}
-		high = p;
-		while(p2 != high->next){
-			p->next = p2;
-			p2 = p2->next;
-			p = p->next;
-		}
-		low = list->next;
-
+		if(p1) p->next = p1;
+		if(p2) p->next = p2;
+		p1 = dummy->next;
 	}
-	void mergeSort(ListNode* low, ListNode* high){
-		if(low != high){
+
+	void mergeSort(ListNode* &low){
+		if(low && low->next){
 			ListNode* p1 = low;
 			ListNode* p2 = low;
-			while(p2 != high && p2->next != high){
+			while(p2->next && p2->next->next){
 				p1 = p1->next;
 				p2 = p2->next->next;
 			}
-			ListNode* mid = p1;
+			p2 = p1->next;
+			p1->next = NULL;
+			p1 = low;
 		
-			mergeSort(low, mid);
-			mergeSort(mid->next, high);
-			mergeCore(low, mid, high);
+			mergeSort(p1);
+			mergeSort(p2);
+			mergeCore(p1, p2);
+			low = p1;
 		}
 	}
-
 	
 	ListNode* sortList(ListNode* head){
-		ListNode* p = head;
-		while(p->next) p = p->next;
-		ListNode* end = p;
-		mergeSort(head, end);
+		mergeSort(head);
 		return head;
 	}
 };
@@ -140,7 +85,6 @@ public:
 				p = p->next;
 			}
 		}
-
 		return head;
 	}
 };	// bubbleSort Time Limit Exceeded
@@ -197,12 +141,12 @@ int main(){
 	ListNode node2(2);
 	ListNode node3(1);
 	ListNode node4(3);
-//	ListNode node5(-3);
+	ListNode node5(-3);
 	node1.next = &node2;
 	node2.next = &node3;
 	node3.next = &node4;
-	//node4.next = &node5;
-	Solution A;
+	node4.next = &node5;
+	Solution3 A;
 	ListNode* head = A.sortList(&node1);
 	printList(head);
 	return 0;
