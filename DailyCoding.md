@@ -1,6 +1,5 @@
 ### Number of leetcodes for everyday's coding. 
 
-===
 
 | Date |Numbers	|Difficulty	|
 |------|-------	|---------	|
@@ -15,10 +14,18 @@
 
 ### Time Spending for each problem
 
-===
 
 | # |Problem								|Time			|
 |---|------									|---			|
 |297|Serialize and Deserialize Binary Tree	|2H'0.5H'		|
 |297|Serialize and Deserialize Binary Tree	|2H'0.5H'		|
 |297|Serialize and Deserialize Binary Tree	|2H'0.5H'		|
+
+
+### Time Spending for general practice 
+
+|Problem								|Time			|Relative leetcode	|
+|------									|---			| ---				|
+|Serialize and Deserialize BinaryTree	|2H'0.5H'		|297				|
+|Serialize and Deserialize BinaryTree	|2H'0.5H'		|297				|
+|Serialize and Deserialize BinaryTree	|2H'0.5H'		|297'761'675'		|
