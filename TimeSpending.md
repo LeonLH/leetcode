@@ -4,20 +4,17 @@
 
 (Note: Only problems takes more than 3 hours would be recorded here.)
 
-| # |Problem								|Time			|
-|---|------									|---			|
-|297|Serialize and Deserialize Binary Tree	|2H'0.5H'		|
-|297|Serialize and Deserialize Binary Tree	|2H'0.5H'		|
-|297|Serialize and Deserialize Binary Tree	|2H'0.5H'		|
+| # |Problem								|Time			|	|
+|---|------									|---			|---|
+|297|Serialize and Deserialize Binary Tree	|9H				|[C++](./cpp/serializeAndDeserializeBinaryTree.cpp)|
 
 
 ### Time Spending for general practice 
 
-|Problem								|Time			|Relative leetcode #|
-|------									|---			| ---				|
-|Serialize and Deserialize BinaryTree	|2H'0.5H'		|297				|
-|Serialize and Deserialize BinaryTree	|2H'0.5H'		|297				|
-|Serialize and Deserialize BinaryTree	|2H'0.5H'		|297'761'675'		|
+|Problem									|Time			|Relative leetcode #|
+|------										|---			| ---				|
+|Create Tree with Inorder and Preorder		|3H				|					|
+|iso_base iso i/ostream iostream sstream	|3.5H			|					|
 
 
 
