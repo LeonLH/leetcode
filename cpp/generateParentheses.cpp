@@ -34,7 +34,37 @@ public:
 		else 
 			return true;
 	}
+
 	void solve(string &str){
+		if(!nleft && !nright){
+			if(isValid(str))
+				resv.push_back(str);
+		}
+		else{
+			if(nleft > 0){
+				str += "(";
+				nleft--;
+				if(isValid(str))
+					solve(str);
+				string::iterator it = str.end();
+				nleft++;
+				str.erase(it-1);
+			}
+
+			if(nright > 0){
+				str += ")";
+				nright--;
+				if(isValid(str))
+					solve(str);
+				string::iterator it = str.end();
+				nright++;
+				str.erase(it-1);
+			}
+		}
+	}
+
+
+	void solve1(string &str){
 		if(!nleft && !nright){
 			if(isValid(str))
 				resv.push_back(str);
