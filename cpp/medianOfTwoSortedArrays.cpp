@@ -1,6 +1,11 @@
 #include<iostream>
 #include<vector>
 using namespace std;
+
+// A simple Solution but cannot meet the requirment to the problem's 
+// time complexity O(log(m+n)). 
+// Below, I find a brilliant Solution in the discussion area which 
+// only need only O(long(min(m, n)))
 class Solution {
 public:
 	double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2){
@@ -38,6 +43,7 @@ public:
 		
 	}
 };
+
 int main(){
 	vector<int> nums1 = {1, 3, 8, 21, 36, 47};
 	vector<int> nums2 = {4, 18, 28, 60};
@@ -47,3 +53,6 @@ int main(){
 	float m = A.findMedianSortedArrays(nums3, nums4);
 	return 0;
 }
+// O(log(min(m,n))) Solution:
+// https://leetcode.com/problems/median-of-two-sorted-arrays/discuss/2481/Share-my-O(log(min(mn))-solution-with-explanation) 
+
