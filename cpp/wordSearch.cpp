@@ -3,6 +3,7 @@
 #include<string>
 using namespace std;
 
+// 60ms, There is a faster method.(12ms).
 class Solution{
 public:
 	vector<vector<char>> state;
