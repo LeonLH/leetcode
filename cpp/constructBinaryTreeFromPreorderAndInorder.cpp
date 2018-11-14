@@ -9,6 +9,7 @@
 // 		2. Postorder+Inorder: 它与Preorder+Inorder的方法是类似的，只是它是从Postorder的尾巴从后往前走，每一个数也要查询他在Inorder中的位置，并查看它左右两端是否为空，另一个区别是，若左右都可以插入时，它是优先插入到右子树上的;
 // 		3. levelorder+Inorder: 它需要借助一个队列。
 // 	2. 这一类问题，如果思路不清晰的话可以花一个稍微复杂一点的图，在纸上跑几遍过程，思路就慢慢的遍清晰了。
+// 	3. 采用递归方法，用回溯法；
 #include<iostream>
 #include<stack>
 #include<vector>
@@ -20,6 +21,14 @@ typedef struct TreeNode{
 	TreeNode(int x): val(x), left(NULL), right(NULL) {};
 
 }TreeNode, BiTNode, BSTNode, *BiTree;
+
+// divide and conquer method
+
+
+
+
+
+// iterative method
 class Solution{
 public:
 	TreeNode* buildTree(vector<int>& preorder,vector<int>& inorder){
