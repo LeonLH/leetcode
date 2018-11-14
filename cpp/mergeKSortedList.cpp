@@ -49,6 +49,10 @@ public:
 			head = p1;
 		}
 	}
+
+	// Soppose we have three lists: list1, list2, list3
+	// First, we just link these lists end to end to a long linked list;
+	// Second, we use mergeSort to sort the long list.
 	ListNode* mergeKLists(vector<ListNode*>& lists){
 		if(lists.size() < 1)
 			return NULL;
