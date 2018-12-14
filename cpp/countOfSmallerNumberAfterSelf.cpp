@@ -2,7 +2,7 @@
 #include<vector>
 using namespace std;
 
-// 880ms O(n^2)
+// Brute force, 880ms O(n^2)
 class Solution{
 public:
 	vector<int> countSmaller(vector<int>& nums){
@@ -18,6 +18,8 @@ public:
 		return res;
 	}
 };
+
+//
 int main(){
 	vector<int> nums = {1}; //{38, 64, 52, 32, 13, 37, 24, 96, 58};
 	Solution A;

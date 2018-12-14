@@ -8,4 +8,11 @@ Specs: Already done with iterative method. But there is a better recursive metho
 - [] Regular Expressiong Matching 
 Spec: After trying for more than 4 hours with backtracking, there still be some bugs to be solve. After looking others answers, May Dynamic Programming is a better way to this problem. Try it with DP after strudy DP. 
 
+- [] Serialize and Deserialize Tree
+Spec: After trying for more than 9 hours still have some problems. 
+
+- [] Median of Two sorted array
+Spec: Using Divide and Conquer, a little complicated and still need time to carefully study. 
+
+
 
